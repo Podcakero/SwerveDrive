@@ -88,7 +88,6 @@ public class SwerveSubsystem extends SubsystemBase
       try
       {
         Thread.sleep(1000);
-        gyro.calibrate();
         zeroHeading();
       }
       catch (Exception e)
@@ -112,11 +111,6 @@ public class SwerveSubsystem extends SubsystemBase
   public void resetYaw()
   {
     gyro.zeroYaw();
-  }
-  
-  public void calibrateGyro()
-  {
-    gyro.calibrate();
   }
   
   // Return gyro heading, make sure to read navx docs on this
