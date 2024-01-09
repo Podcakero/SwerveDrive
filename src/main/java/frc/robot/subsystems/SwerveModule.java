@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
@@ -28,7 +27,6 @@ public class SwerveModule extends SubsystemBase
   private final RelativeEncoder turningEncoder;
   
   private final PIDController turningPidController;
-  private SparkPIDController builtinTurningPidController;
   
   private final DutyCycleEncoder absoluteEncoder;
   
@@ -74,21 +72,10 @@ public class SwerveModule extends SubsystemBase
     turningEncoder.setVelocityConversionFactor(ModuleConstants.TURNING_ENCODER_VELOCITY_CONVERSION_FACTOR);
     
     // Create PID controller on ROBO RIO
-    turningPidController = new PIDController(ModuleConstants.TURNING_PROPORTIONAL, 0, 0);
+    turningPidController = new PIDController(ModuleConstants.TURNING_PROPORTIONAL, ModuleConstants.TURNING_INTEGRAL, ModuleConstants.TURNING_DIFFERENTIAL);
     
     // Tell PID controller that it is a *wheel*
     turningPidController.enableContinuousInput(-Math.PI, Math.PI);
-    
-    builtinTurningPidController = turningMotor.getPIDController();
-    
-    // Set PID values for the simulated Spark max PID
-    builtinTurningPidController.setP(ModuleConstants.TURNING_PROPORTIONAL);
-    builtinTurningPidController.setI(ModuleConstants.TURNING_INTEGRAL);
-    builtinTurningPidController.setD(ModuleConstants.TURNING_DIFFERENTIAL);
-    builtinTurningPidController.setIZone(0.0);
-    builtinTurningPidController.setFF(0.0);
-    builtinTurningPidController.setOutputRange(-1, 1);
-    turningMotor.burnFlash();
     
     // Set motors to Brake when no input is sent
     driveMotor.setIdleMode(IdleMode.kBrake);

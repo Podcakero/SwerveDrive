@@ -13,21 +13,22 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class SwerveJoystick extends Command
+public class SwerveJoystickCommand extends Command
 {
   // Create variables
   private final SwerveSubsystem swerveSubsystem;
   private final SlewRateLimiter xLimiter, yLimiter;
-  private double initialHeading;
+  private double targetHeading;
   private PIDController thetaController;
   
   // Command constructor
-  public SwerveJoystick(SwerveSubsystem swerveSubsystem)
+  public SwerveJoystickCommand(SwerveSubsystem swerveSubsystem)
   {
     // Assign values passed from constructor
     this.swerveSubsystem = swerveSubsystem;
     
     // Slew rate limiter
+    // This smooths out the behavior of converting the Joystick values to Swerve Movements
     this.xLimiter = new SlewRateLimiter(DriveConstants.DRIVE_MAX_LINEAR_ACCELERATION);
     this.yLimiter = new SlewRateLimiter(DriveConstants.DRIVE_MAX_LINEAR_ACCELERATION);
     
@@ -43,7 +44,7 @@ public class SwerveJoystick extends Command
   @Override
   public void initialize()
   {
-    initialHeading = swerveSubsystem.getHeading();
+    targetHeading = swerveSubsystem.getHeading();
   }
   
   // Running loop of command
@@ -51,9 +52,9 @@ public class SwerveJoystick extends Command
   public void execute()
   {
     // Set speeds based on Joystick values
-    double xSpeed = -IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(0);
-    double ySpeed = IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(1);
-    double turningSpeed = IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(3);
+    double xSpeed = -IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_X_AXIS_PORT);
+    double ySpeed = IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_Y_AXIS_PORT);
+    double turningSpeed = IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_TWIST_AXIS_PORT);
     
     // Check if joystick values are above deadzone
     if (Math.abs(xSpeed) > IOConstants.JOYSTICK_DEADZONE)
@@ -75,10 +76,10 @@ public class SwerveJoystick extends Command
     ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.DRIVE_MAX_LINEAR_SPEED;
     
     // Set new heading
-    initialHeading += turningSpeed;
+    targetHeading += turningSpeed;
     
-    // Calculate turning speed to reach desired heading
-    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), initialHeading) * -100;
+    // Calculate turning speed required to reach desired heading
+    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), targetHeading) * DriveConstants.TURNING_SPEED_MULTIPLIER;
     
     // If we are not at the turning minimum, don't turn.
     if (turningSpeed < DriveConstants.TURNING_MINIMUM)
@@ -98,11 +99,12 @@ public class SwerveJoystick extends Command
     
     // Smartdashboard update
     SmartDashboard.putNumber("Turning Speed", turningSpeed);
-    SmartDashboard.putNumber("Inital Heading", initialHeading);
+    SmartDashboard.putNumber("Target Heading", targetHeading);
     SmartDashboard.putNumber("NavX Heading", swerveSubsystem.getHeading());
     
     // Set the module state
-    swerveSubsystem.setModuleStates(DriveConstants.kDriveKinematics
+    // This sets the motor power for each Swerve Module
+    swerveSubsystem.setModuleStates(DriveConstants.DRIVE_KINEMATICS
         .toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed,
             Rotation2d.fromDegrees(swerveSubsystem.getRobotDegrees()))));
   }

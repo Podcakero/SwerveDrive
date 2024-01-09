@@ -5,7 +5,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.SwerveJoystick;
+import frc.robot.commands.SwerveJoystickCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -19,7 +19,7 @@ public class RobotContainer
   public RobotContainer()
   {
     SmartDashboard.putData(chooser);
-    swerveSubsystem.setDefaultCommand(new SwerveJoystick(swerveSubsystem));
+    swerveSubsystem.setDefaultCommand(new SwerveJoystickCommand(swerveSubsystem));
   }
   
   // Return the command to run during auto

@@ -16,8 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class SwerveSubsystem extends SubsystemBase
-{
-  
+{ 
   // Create 4 swerve modules with attributes from constants
   private final SwerveModule frontLeft = new SwerveModule(
       DriveConstants.FRONT_LEFT_DRIVE_MOTOR_ID,
@@ -61,6 +60,9 @@ public class SwerveSubsystem extends SubsystemBase
   
   // Create the navX using roboRIO expansion port
   private AHRS gyro = new AHRS(SPI.Port.kMXP);
+
+  // Create odometer for swerve drive
+  private SwerveDriveOdometry odometer;
   
   // Returns positions of the swerve modules for odometry
   public SwerveModulePosition[] getModulePositions()
@@ -73,9 +75,6 @@ public class SwerveSubsystem extends SubsystemBase
         backRight.getPosition()
     });
   }
-  
-  // Create odometer for swerve drive
-  private SwerveDriveOdometry odometer;
   
   // Swerve subsystem constructor
   public SwerveSubsystem()
@@ -99,7 +98,7 @@ public class SwerveSubsystem extends SubsystemBase
     
     // Set robot odometry object to current robot heading and swerve module
     // positions
-    odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
+    odometer = new SwerveDriveOdometry(DriveConstants.DRIVE_KINEMATICS,
         getOdometryAngle(), getModulePositions());
   }
   
@@ -150,8 +149,7 @@ public class SwerveSubsystem extends SubsystemBase
   // Move the swerve modules to the desired SwerveModuleState
   public void setModuleStates(SwerveModuleState[] desiredStates)
   {
-    // Make sure robot rotation is all ways possible by changing other module
-    // roation speeds
+    // Make sure robot rotation is all ways possible by changing other module roation speeds
     SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.DRIVE_MAX_LINEAR_SPEED);
     
     frontLeft.setDesiredState(desiredStates[0]);
@@ -189,6 +187,8 @@ public class SwerveSubsystem extends SubsystemBase
   public double getRobotDegrees()
   {
     double rawValue = gyro.getAngle() % 360.0;
+
+    // Check if value needs to wrap around
     if (rawValue < 0.0)
     {
       return (rawValue + 360.0);
