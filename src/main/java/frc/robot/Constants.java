@@ -8,7 +8,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import swervelib.SwerveDrive;
 
 public final class Constants
 {
@@ -30,8 +29,6 @@ public final class Constants
     public static final double TURNING_PROPORTIONAL = 0.5;
     public static final double TURNING_INTEGRAL = 0.0;
     public static final double TURNING_DIFFERENTIAL = 0.005;
-    
-    public static SwerveDrive SWERVE_DRIVE;
   }
   
   // Swerve drive

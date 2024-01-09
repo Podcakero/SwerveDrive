@@ -4,17 +4,9 @@
 
 package frc.robot;
 
-import java.io.File;
-import java.io.IOException;
-
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.ModuleConstants;
-
-import swervelib.parser.SwerveParser;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,17 +31,6 @@ public class Robot extends TimedRobot
   public void robotInit()
   {
     m_robotContainer = new RobotContainer();
-    
-    try
-    {
-      ModuleConstants.SWERVE_DRIVE = new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve"))
-          .createSwerveDrive(DriveConstants.DRIVE_MAX_LINEAR_SPEED);
-    }
-    catch (IOException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
   }
   
   /**
