@@ -1,5 +1,5 @@
 // FRC2106 Junkyard Dogs - Continuity Base Code - www.team2106.org
-// Modified by Greyson Weimer for FRC 2890 The Hawk Collection
+// Modified by Greyson Weimer for FRC 2890 The Hawk Collective
 
 package frc.robot.commands;
 
