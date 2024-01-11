@@ -104,6 +104,7 @@ public class SwerveJoystickCommand extends Command
     
     // Set the module state
     // This sets the motor power for each Swerve Module
+    // Joystick control is Field Relative, not Robot Relative
     swerveSubsystem.setModuleStates(DriveConstants.DRIVE_KINEMATICS
         .toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, turningSpeed,
             Rotation2d.fromDegrees(swerveSubsystem.getRobotDegrees()))));
