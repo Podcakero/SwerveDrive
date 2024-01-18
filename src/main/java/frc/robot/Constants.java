@@ -38,10 +38,10 @@ public final class Constants
   public static final class DriveConstants
   {
     // Distance between right and left wheels
-    public static final double TRACK_WIDTH = Units.inchesToMeters(21.25);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(18.625);
     
     // Distance between front and back wheels
-    public static final double WHEEL_BASE = Units.inchesToMeters(21.25);
+    public static final double WHEEL_BASE = Units.inchesToMeters(19.50);
     
     // Creates the Kinematics used in Swerve Drive
     // See javadoc for more info
@@ -52,16 +52,16 @@ public final class Constants
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2));
     
     // Driving Motor Ports
-    public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 1;
-    public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 3;
-    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 7;
-    public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 5;
+    public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 10;
+    public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 11;
+    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 13;
+    public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 12;
     
     // Turning Motor Ports
-    public static final int FRONT_LEFT_TURNING_MOTOR_ID = 2;
-    public static final int FRONT_RIGHT_TURNING_MOTOR_ID = 4;
-    public static final int BACK_LEFT_TURNING_MOTOR_ID = 8;
-    public static final int BACK_RIGHT_TURNING_MOTOR_ID = 6;
+    public static final int FRONT_LEFT_TURNING_MOTOR_ID = 20;
+    public static final int FRONT_RIGHT_TURNING_MOTOR_ID = 21;
+    public static final int BACK_LEFT_TURNING_MOTOR_ID = 23;
+    public static final int BACK_RIGHT_TURNING_MOTOR_ID = 22;
 
     // Encoders on Drive Motors
     public static final boolean FRONT_LEFT_DRIVE_ENCODER_REVERSED = true;
@@ -76,10 +76,10 @@ public final class Constants
     public static final boolean BACK_RIGHT_TURNING_ENCODER_REVERSED = true;
     
     // Absolute Encoders
-    public static final int FRONT_LEFT_ABSOLUTE_ENCODER_PORT = 0;
-    public static final int FRONT_RIGHT_ABSOLUTE_ENCODER_PORT = 1;
-    public static final int BACK_LEFT_ABSOLUTE_ENCODER_PORT = 3;
-    public static final int BACK_RIGHT_ABSOLUTE_ENCODER_PORT = 2;
+    public static final int FRONT_LEFT_ABSOLUTE_ENCODER_PORT = 30;
+    public static final int FRONT_RIGHT_ABSOLUTE_ENCODER_PORT = 31;
+    public static final int BACK_LEFT_ABSOLUTE_ENCODER_PORT = 33;
+    public static final int BACK_RIGHT_ABSOLUTE_ENCODER_PORT = 32;
     
     // Absolute encoders reversed
     public static final boolean FRONT_LEFT_ABSOLUTE_ENCODER_REVERSED = false;
@@ -121,12 +121,12 @@ public final class Constants
   // Input and Output
   public static final class IOConstants
   {
-    public static final double JOYSTICK_DEADZONE = 0.05;
+    public static final double JOYSTICK_DEADZONE = 0.15;
     
-    public static final int JOYSTICK_PORT = 4;
+    public static final int JOYSTICK_PORT = 0;
     public static final int JOYSTICK_X_AXIS_PORT = 0;
     public static final int JOYSTICK_Y_AXIS_PORT = 1;
-    public static final int JOYSTICK_TWIST_AXIS_PORT = 3;
+    public static final int JOYSTICK_TWIST_AXIS_PORT = 2;
     
     public static final Joystick DRIVER_JOYSTICK = new Joystick(JOYSTICK_PORT);
     
