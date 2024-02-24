@@ -44,16 +44,9 @@ public class SwerveModule extends SubsystemBase
     
     moduleName = name;
     
-    SmartDashboard.putNumber(moduleName + " ABE Manual", 0);
-    
     // Create absolute encoder
     absoluteEncoder = new CANcoder(absoluteEncoderId);
 
-    //absoluteEncoder.getConfigurator().apply(new CANcoderConfiguration());
-    
-    // Set duty cycle range of encoder of ABE encoder
-    //absoluteEncoder.setDutyCycleRange(DriveConstants.ABSOLUTE_ENCODER_MINIMUM, DriveConstants.ABSOLUTE_ENCODER_MAXIMUM);
-    
     // Create drive and turning motor
     driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
     turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -149,7 +142,7 @@ public class SwerveModule extends SubsystemBase
   public void resetEncoders()
   {
     driveEncoder.setPosition(0);
-    turningEncoder.setPosition(absoluteEncoder.getAbsolutePosition().getValueAsDouble() * ModuleConstants.TURNING_MOTOR_GEAR_RATIO);
+    turningEncoder.setPosition(absoluteEncoder.getAbsolutePosition().getValueAsDouble() / ModuleConstants.TURNING_MOTOR_GEAR_RATIO);
   }
   
   // Get swerve module current state, aka velocity and wheel rotation

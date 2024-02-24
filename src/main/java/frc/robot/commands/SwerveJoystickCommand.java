@@ -10,6 +10,8 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -20,6 +22,8 @@ public class SwerveJoystickCommand extends Command
   private final SlewRateLimiter xLimiter, yLimiter;
   private double targetHeading;
   private PIDController thetaController;
+
+  private GenericEntry targetHeadingEntry = Shuffleboard.getTab("Swerve").add("Target Heading", targetHeading).getEntry();
   
   // Command constructor
   public SwerveJoystickCommand(SwerveSubsystem swerveSubsystem)
@@ -80,7 +84,7 @@ public class SwerveJoystickCommand extends Command
     
     // Calculate turning speed required to reach desired heading
     //turningSpeed = 0.0;
-    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), targetHeading) * DriveConstants.TURNING_SPEED_MULTIPLIER;
+    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), targetHeading);
     
     // If we are not at the turning minimum, don't turn.
     if (Math.abs(turningSpeed) < DriveConstants.TURNING_MINIMUM)
@@ -104,6 +108,8 @@ public class SwerveJoystickCommand extends Command
     SmartDashboard.putNumber("ySpeed", ySpeed);
     SmartDashboard.putNumber("Joystick Turn", IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_TWIST_AXIS_PORT));
     SmartDashboard.putNumber("turningSpeed", turningSpeed);
+
+    targetHeadingEntry.setDouble(targetHeading);
     
     // Set the module state
     // This sets the motor power for each Swerve Module

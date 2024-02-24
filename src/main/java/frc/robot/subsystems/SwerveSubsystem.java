@@ -6,12 +6,14 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
@@ -61,8 +63,15 @@ public class SwerveSubsystem extends SubsystemBase
   // Create the navX using roboRIO expansion port
   private AHRS gyro = new AHRS(SPI.Port.kMXP);
 
+  private GenericEntry fltp = Shuffleboard.getTab("Swerve").add("Front Left Turning Position", frontLeft.getTurningPosition()).getEntry();
+  private GenericEntry frtp = Shuffleboard.getTab("Swerve").add("Front Right Turning Position", frontRight.getTurningPosition()).getEntry();
+  private GenericEntry bltp = Shuffleboard.getTab("Swerve").add("Back Left Turning Position", backLeft.getTurningPosition()).getEntry();
+  private GenericEntry brtp = Shuffleboard.getTab("Swerve").add("Back Right Turning Position", backRight.getTurningPosition()).getEntry();
+
   // Create odometer for swerve drive
   private SwerveDriveOdometry odometer;
+
+  private Field2d field = new Field2d();
   
   // Returns positions of the swerve modules for odometry
   public SwerveModulePosition[] getModulePositions()
@@ -81,6 +90,9 @@ public class SwerveSubsystem extends SubsystemBase
   {
     // Reset robot encoders on startup
     resetAllEncoders();
+
+    Shuffleboard.getTab("Swerve").add("Robot Position", field);
+    Shuffleboard.getTab("Swerve").add("Gyro", gyro);
 
     //setModuleStates(DriveConstants.DRIVE_KINEMATICS
     //.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(1, 0.0, 0.0, Rotation2d.fromDegrees(0.0))));
@@ -102,6 +114,8 @@ public class SwerveSubsystem extends SubsystemBase
     // positions
     odometer = new SwerveDriveOdometry(DriveConstants.DRIVE_KINEMATICS,
         getOdometryAngle(), getModulePositions());
+
+    field.setRobotPose(getPose());
   }
   
   // Reset gyro heading
@@ -177,13 +191,13 @@ public class SwerveSubsystem extends SubsystemBase
   // The commented out method is for if the gyroscope is reversed direction
   public Rotation2d getOdometryAngle()
   {
-    return (Rotation2d.fromDegrees(gyro.getYaw()));
+    return (Rotation2d.fromDegrees(gyro.getYaw() * -1));
   }
   
   // Returns an angle from 0 to 360 that is continuous, meaning it loops
   public double getRobotDegrees()
   {
-    double rawValue = gyro.getAngle() % 360.0;
+    double rawValue = 360 - (gyro.getAngle() % 360.0);
 
     // Check if value needs to wrap around
     if (rawValue < 0.0)
@@ -210,6 +224,7 @@ public class SwerveSubsystem extends SubsystemBase
   {
     // Update odometer for it to caculate robot position
     odometer.update(getOdometryAngle(), getModulePositions());
+    field.setRobotPose(getPose());
     
     // Put odometry data on smartdashboard
     SmartDashboard.putNumber("Heading", getHeading());
@@ -223,6 +238,11 @@ public class SwerveSubsystem extends SubsystemBase
     
     SmartDashboard.putNumber("Robot Acceleration X", gyro.getRawAccelX());
     SmartDashboard.putNumber("Robot Acceleration Y", gyro.getRawAccelY());
+
+    fltp.setDouble(frontLeft.getTurningPosition());
+    frtp.setDouble(frontRight.getTurningPosition());
+    bltp.setDouble(backLeft.getTurningPosition());
+    brtp.setDouble(backRight.getTurningPosition());
     
     // Update smartdashboard data for each swerve module object
     frontLeft.update();

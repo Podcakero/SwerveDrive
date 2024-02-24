@@ -120,7 +120,7 @@ public final class Constants
   {
     public static final double JOYSTICK_DEADZONE = 0.5;
     
-    public static final int JOYSTICK_PORT = 0;
+    public static final int JOYSTICK_PORT = 1;
     public static final int JOYSTICK_X_AXIS_PORT = 0;
     public static final int JOYSTICK_Y_AXIS_PORT = 1;
     public static final int JOYSTICK_TWIST_AXIS_PORT = 3;
