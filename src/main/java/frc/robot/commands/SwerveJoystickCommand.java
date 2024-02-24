@@ -44,6 +44,7 @@ public class SwerveJoystickCommand extends Command
   @Override
   public void initialize()
   {
+    swerveSubsystem.resetAllEncoders();
     targetHeading = swerveSubsystem.getHeading();
   }
   

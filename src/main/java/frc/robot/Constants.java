@@ -29,7 +29,7 @@ public final class Constants
     
     // Turning PID
     // See: https://en.wikipedia.org/wiki/Proportional–integral–derivative_controller
-    public static final double TURNING_PROPORTIONAL = 0.0;
+    public static final double TURNING_PROPORTIONAL = 0.05;
     public static final double TURNING_INTEGRAL = 0.0;
     public static final double TURNING_DIFFERENTIAL = 0.0;
   }
@@ -89,10 +89,10 @@ public final class Constants
     
     // Encoder Offsets
     // These will need to me manually adjusted based on the individual Swerve Modules
-    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.516;
-    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.370;
-    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.395;
-    public static final double BACK_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.225;
+    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.0;
+    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.0;
+    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.0;
+    public static final double BACK_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.0;
     
     // Max Speeds
     public static final double DRIVE_MAX_LINEAR_SPEED = .1;
@@ -107,8 +107,8 @@ public final class Constants
     
     // Motor Current Limits
 
-    public static final int DRIVE_MOTOR_CURRENT_LIMIT = 40;
-    public static final int TURNING_MOTOR_CURRENT_LIMIT = 20;
+    public static final int DRIVE_MOTOR_CURRENT_LIMIT = 30;
+    public static final int TURNING_MOTOR_CURRENT_LIMIT = 30;
     
     // Misc
     public static final double TURNING_MINIMUM = 0.05; // Minimum turning speed which should actually cause a turn
