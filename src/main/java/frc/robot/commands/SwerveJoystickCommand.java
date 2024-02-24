@@ -57,15 +57,15 @@ public class SwerveJoystickCommand extends Command
     double turningSpeed = IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_TWIST_AXIS_PORT);
     
     // Check if joystick values are above deadzone
-    if (Math.abs(xSpeed) > IOConstants.JOYSTICK_DEADZONE)
+    if (Math.abs(xSpeed) < IOConstants.JOYSTICK_DEADZONE)
     {
       xSpeed = 0.0;
     }
-    if (Math.abs(ySpeed) > IOConstants.JOYSTICK_DEADZONE)
+    if (Math.abs(ySpeed) < IOConstants.JOYSTICK_DEADZONE)
     {
       ySpeed = 0.0;
     }
-    if (Math.abs(turningSpeed) > IOConstants.JOYSTICK_DEADZONE)
+    if (Math.abs(turningSpeed) < IOConstants.JOYSTICK_DEADZONE)
     {
       turningSpeed = 0.0;
     }
@@ -76,26 +76,22 @@ public class SwerveJoystickCommand extends Command
     ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.DRIVE_MAX_LINEAR_SPEED;
     
     // Set new heading
-    //targetHeading += turningSpeed;
+    targetHeading += turningSpeed;
     
     // Calculate turning speed required to reach desired heading
     //turningSpeed = 0.0;
     turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), swerveSubsystem.getHeading()) * DriveConstants.TURNING_SPEED_MULTIPLIER;
     
     // If we are not at the turning minimum, don't turn.
-    if (turningSpeed < DriveConstants.TURNING_MINIMUM)
+    if (Math.abs(turningSpeed) < DriveConstants.TURNING_MINIMUM)
     {
       turningSpeed = 0.0;
     }
     
     // Limit turning speed
-    if (turningSpeed > DriveConstants.DRIVE_MAX_ANGULAR_SPEED)
+    if (Math.abs(turningSpeed) > DriveConstants.DRIVE_MAX_ANGULAR_SPEED)
     {
       turningSpeed = DriveConstants.DRIVE_MAX_ANGULAR_SPEED;
-    }
-    else if (turningSpeed < -DriveConstants.DRIVE_MAX_ANGULAR_SPEED)
-    {
-      turningSpeed = -DriveConstants.DRIVE_MAX_ANGULAR_SPEED;
     }
     
     // Smartdashboard update

@@ -29,19 +29,19 @@ public final class Constants
     
     // Turning PID
     // See: https://en.wikipedia.org/wiki/Proportional–integral–derivative_controller
-    public static final double TURNING_PROPORTIONAL = 0.2;
-    public static final double TURNING_INTEGRAL = 0.01;
-    public static final double TURNING_DIFFERENTIAL = 0.005;
+    public static final double TURNING_PROPORTIONAL = 0.0;
+    public static final double TURNING_INTEGRAL = 0.0;
+    public static final double TURNING_DIFFERENTIAL = 0.0;
   }
   
   // Swerve drive
   public static final class DriveConstants
   {
     // Distance between right and left wheels
-    public static final double TRACK_WIDTH = Units.inchesToMeters(21.25);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(20.25);
     
     // Distance between front and back wheels
-    public static final double WHEEL_BASE = Units.inchesToMeters(21.25);
+    public static final double WHEEL_BASE = Units.inchesToMeters(23.5);
     
     // Creates the Kinematics used in Swerve Drive
     // See javadoc for more info
@@ -54,7 +54,7 @@ public final class Constants
     // Driving Motor Ports
     public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 11;
     public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 13;
-    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 0;
+    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 2;
     public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 12;
     
     // Turning Motor Ports
@@ -89,33 +89,30 @@ public final class Constants
     
     // Encoder Offsets
     // These will need to me manually adjusted based on the individual Swerve Modules
-    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.016;
-    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.950;
-    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.39;
+    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.516;
+    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.370;
+    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.395;
     public static final double BACK_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.225;
-    
-    // Encoder Range
-    public static final double ABSOLUTE_ENCODER_MINIMUM = 1.0 / 4096.0;
-    public static final double ABSOLUTE_ENCODER_MAXIMUM = 4095.0 / 4096.0;
     
     // Max Speeds
     public static final double DRIVE_MAX_LINEAR_SPEED = .1;
-    public static final double DRIVE_MAX_ANGULAR_SPEED = .1 * 2 * Math.PI; 
-    public static final double DRIVE_MAX_LINEAR_ACCELERATION = 1;
-    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = 1;
+    public static final double DRIVE_MAX_ANGULAR_SPEED = .1; 
+    public static final double DRIVE_MAX_LINEAR_ACCELERATION = .1;
+    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = .1;
     
     // PID Thetas
-    public static final double PROPORTIOAL_THETA_CONTROLLER = 0.001;
+    public static final double PROPORTIOAL_THETA_CONTROLLER = 0.05;
     public static final double INTEGRAL_THETA_CONTROLLER = 0.0;
     public static final double DIFFERENTIAL_THETA_CONTROLLER = 0.0;
     
     // Motor Current Limits
+
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 40;
     public static final int TURNING_MOTOR_CURRENT_LIMIT = 20;
     
     // Misc
-    public static final double TURNING_MINIMUM = 0.2; // Minimum turning speed which should actually cause a turn
-    public static final double TURNING_SPEED_MULTIPLIER = -100.0; // Multiplier for the turning speed.
+    public static final double TURNING_MINIMUM = 0.05; // Minimum turning speed which should actually cause a turn
+    public static final double TURNING_SPEED_MULTIPLIER = 0.1; // Multiplier for the turning speed.
   }
   
   // Input and Output
