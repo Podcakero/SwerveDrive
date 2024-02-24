@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -80,6 +81,9 @@ public class SwerveSubsystem extends SubsystemBase
   {
     // Reset robot encoders on startup
     resetAllEncoders();
+
+    //setModuleStates(DriveConstants.DRIVE_KINEMATICS
+    //.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(1, 0.0, 0.0, Rotation2d.fromDegrees(0.0))));
     
     // Zero navX heading on new thread when robot starts
     new Thread(() ->

@@ -96,12 +96,12 @@ public final class Constants
     
     // Max Speeds
     public static final double DRIVE_MAX_LINEAR_SPEED = .1;
-    public static final double DRIVE_MAX_ANGULAR_SPEED = .1; 
+    public static final double DRIVE_MAX_ANGULAR_SPEED = .05; 
     public static final double DRIVE_MAX_LINEAR_ACCELERATION = .1;
     public static final double DRIVE_MAX_ANGULAR_ACCELERATION = .1;
     
     // PID Thetas
-    public static final double PROPORTIOAL_THETA_CONTROLLER = 0.05;
+    public static final double PROPORTIOAL_THETA_CONTROLLER = 0.1;
     public static final double INTEGRAL_THETA_CONTROLLER = 0.0;
     public static final double DIFFERENTIAL_THETA_CONTROLLER = 0.0;
     
@@ -112,7 +112,7 @@ public final class Constants
     
     // Misc
     public static final double TURNING_MINIMUM = 0.05; // Minimum turning speed which should actually cause a turn
-    public static final double TURNING_SPEED_MULTIPLIER = 0.1; // Multiplier for the turning speed.
+    public static final double TURNING_SPEED_MULTIPLIER = 100; // Multiplier for the turning speed.
   }
   
   // Input and Output

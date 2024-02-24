@@ -149,6 +149,7 @@ public class SwerveModule extends SubsystemBase
   public void resetEncoders()
   {
     driveEncoder.setPosition(0);
+    turningEncoder.setPosition(absoluteEncoder.getAbsolutePosition().getValueAsDouble() * ModuleConstants.TURNING_MOTOR_GEAR_RATIO);
   }
   
   // Get swerve module current state, aka velocity and wheel rotation

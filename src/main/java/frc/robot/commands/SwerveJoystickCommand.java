@@ -44,7 +44,6 @@ public class SwerveJoystickCommand extends Command
   @Override
   public void initialize()
   {
-    swerveSubsystem.resetAllEncoders();
     targetHeading = swerveSubsystem.getHeading();
   }
   
@@ -81,7 +80,7 @@ public class SwerveJoystickCommand extends Command
     
     // Calculate turning speed required to reach desired heading
     //turningSpeed = 0.0;
-    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), swerveSubsystem.getHeading()) * DriveConstants.TURNING_SPEED_MULTIPLIER;
+    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), targetHeading) * DriveConstants.TURNING_SPEED_MULTIPLIER;
     
     // If we are not at the turning minimum, don't turn.
     if (Math.abs(turningSpeed) < DriveConstants.TURNING_MINIMUM)
