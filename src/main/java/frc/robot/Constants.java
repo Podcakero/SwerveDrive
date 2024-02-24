@@ -29,8 +29,8 @@ public final class Constants
     
     // Turning PID
     // See: https://en.wikipedia.org/wiki/Proportional–integral–derivative_controller
-    public static final double TURNING_PROPORTIONAL = 0.5;
-    public static final double TURNING_INTEGRAL = 0.0;
+    public static final double TURNING_PROPORTIONAL = 0.2;
+    public static final double TURNING_INTEGRAL = 0.01;
     public static final double TURNING_DIFFERENTIAL = 0.005;
   }
   
@@ -52,16 +52,16 @@ public final class Constants
         new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2));
     
     // Driving Motor Ports
-    public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 1;
-    public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 3;
-    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 7;
-    public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 5;
+    public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 11;
+    public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 13;
+    public static final int BACK_LEFT_DRIVE_MOTOR_ID = 0;
+    public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 12;
     
     // Turning Motor Ports
-    public static final int FRONT_LEFT_TURNING_MOTOR_ID = 2;
-    public static final int FRONT_RIGHT_TURNING_MOTOR_ID = 4;
-    public static final int BACK_LEFT_TURNING_MOTOR_ID = 8;
-    public static final int BACK_RIGHT_TURNING_MOTOR_ID = 6;
+    public static final int FRONT_LEFT_TURNING_MOTOR_ID = 22;
+    public static final int FRONT_RIGHT_TURNING_MOTOR_ID = 23;
+    public static final int BACK_LEFT_TURNING_MOTOR_ID = 21;
+    public static final int BACK_RIGHT_TURNING_MOTOR_ID = 4;
 
     // Encoders on Drive Motors
     public static final boolean FRONT_LEFT_DRIVE_ENCODER_REVERSED = true;
@@ -70,16 +70,16 @@ public final class Constants
     public static final boolean BACK_RIGHT_DRIVE_ENCODER_REVERSED = true;
     
     // Encoders on Turning Motors
-    public static final boolean FRONT_LEFT_TURNING_ENCODER_REVERSED = true;
-    public static final boolean FRONT_RIGHT_TURNING_ENCODING_REVERSED = true;
-    public static final boolean BACK_LEFT_TURNING_ENCODER_REVERSED = true;
-    public static final boolean BACK_RIGHT_TURNING_ENCODER_REVERSED = true;
+    public static final boolean FRONT_LEFT_TURNING_ENCODER_REVERSED = false;
+    public static final boolean FRONT_RIGHT_TURNING_ENCODING_REVERSED = false;
+    public static final boolean BACK_LEFT_TURNING_ENCODER_REVERSED = false;
+    public static final boolean BACK_RIGHT_TURNING_ENCODER_REVERSED = false;
     
     // Absolute Encoders
-    public static final int FRONT_LEFT_ABSOLUTE_ENCODER_PORT = 0;
-    public static final int FRONT_RIGHT_ABSOLUTE_ENCODER_PORT = 1;
-    public static final int BACK_LEFT_ABSOLUTE_ENCODER_PORT = 3;
-    public static final int BACK_RIGHT_ABSOLUTE_ENCODER_PORT = 2;
+    public static final int FRONT_LEFT_ABSOLUTE_ENCODER_PORT = 32;
+    public static final int FRONT_RIGHT_ABSOLUTE_ENCODER_PORT = 33;
+    public static final int BACK_LEFT_ABSOLUTE_ENCODER_PORT = 31;
+    public static final int BACK_RIGHT_ABSOLUTE_ENCODER_PORT = 30;
     
     // Absolute encoders reversed
     public static final boolean FRONT_LEFT_ABSOLUTE_ENCODER_REVERSED = false;
@@ -89,20 +89,20 @@ public final class Constants
     
     // Encoder Offsets
     // These will need to me manually adjusted based on the individual Swerve Modules
-    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.0;
-    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.0;
-    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.0;
-    public static final double BACK_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.0;
+    public static final double FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET = 0.016;
+    public static final double FRONT_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.950;
+    public static final double BACK_LEFT_ASOLUTE_ENCODER_OFFSET = 0.39;
+    public static final double BACK_RIGHT_ABSOLUTE_ENCODER_OFFSET = 0.225;
     
     // Encoder Range
     public static final double ABSOLUTE_ENCODER_MINIMUM = 1.0 / 4096.0;
     public static final double ABSOLUTE_ENCODER_MAXIMUM = 4095.0 / 4096.0;
     
     // Max Speeds
-    public static final double DRIVE_MAX_LINEAR_SPEED = 5;
-    public static final double DRIVE_MAX_ANGULAR_SPEED = 2 * 2 * Math.PI; 
-    public static final double DRIVE_MAX_LINEAR_ACCELERATION = 8;
-    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = 2;
+    public static final double DRIVE_MAX_LINEAR_SPEED = .1;
+    public static final double DRIVE_MAX_ANGULAR_SPEED = .1 * 2 * Math.PI; 
+    public static final double DRIVE_MAX_LINEAR_ACCELERATION = 1;
+    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = 1;
     
     // PID Thetas
     public static final double PROPORTIOAL_THETA_CONTROLLER = 0.001;
@@ -114,16 +114,16 @@ public final class Constants
     public static final int TURNING_MOTOR_CURRENT_LIMIT = 20;
     
     // Misc
-    public static final double TURNING_MINIMUM = 0.05; // Minimum turning speed which should actually cause a turn
+    public static final double TURNING_MINIMUM = 0.2; // Minimum turning speed which should actually cause a turn
     public static final double TURNING_SPEED_MULTIPLIER = -100.0; // Multiplier for the turning speed.
   }
   
   // Input and Output
   public static final class IOConstants
   {
-    public static final double JOYSTICK_DEADZONE = 0.05;
+    public static final double JOYSTICK_DEADZONE = 0.5;
     
-    public static final int JOYSTICK_PORT = 4;
+    public static final int JOYSTICK_PORT = 0;
     public static final int JOYSTICK_X_AXIS_PORT = 0;
     public static final int JOYSTICK_Y_AXIS_PORT = 1;
     public static final int JOYSTICK_TWIST_AXIS_PORT = 3;

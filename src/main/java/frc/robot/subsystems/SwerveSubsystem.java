@@ -26,8 +26,7 @@ public class SwerveSubsystem extends SubsystemBase
       DriveConstants.FRONT_LEFT_ABSOLUTE_ENCODER_PORT,
       DriveConstants.FRONT_LEFT_ABSOLUTE_ENCODER_OFFSET,
       DriveConstants.FRONT_LEFT_ABSOLUTE_ENCODER_REVERSED,
-      "Front Left");
-  
+      "Front Left");  
   private final SwerveModule frontRight = new SwerveModule(
       DriveConstants.FRONT_RIGHT_DRIVE_MOTOR_ID,
       DriveConstants.FRONT_RIGHT_TURNING_MOTOR_ID,

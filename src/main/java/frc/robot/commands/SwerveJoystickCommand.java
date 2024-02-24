@@ -76,10 +76,11 @@ public class SwerveJoystickCommand extends Command
     ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.DRIVE_MAX_LINEAR_SPEED;
     
     // Set new heading
-    targetHeading += turningSpeed;
+    //targetHeading += turningSpeed;
     
     // Calculate turning speed required to reach desired heading
-    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), targetHeading) * DriveConstants.TURNING_SPEED_MULTIPLIER;
+    //turningSpeed = 0.0;
+    turningSpeed = thetaController.calculate(swerveSubsystem.getHeading(), swerveSubsystem.getHeading()) * DriveConstants.TURNING_SPEED_MULTIPLIER;
     
     // If we are not at the turning minimum, don't turn.
     if (turningSpeed < DriveConstants.TURNING_MINIMUM)
@@ -101,6 +102,12 @@ public class SwerveJoystickCommand extends Command
     SmartDashboard.putNumber("Turning Speed", turningSpeed);
     SmartDashboard.putNumber("Target Heading", targetHeading);
     SmartDashboard.putNumber("NavX Heading", swerveSubsystem.getHeading());
+    SmartDashboard.putNumber("Joystick X", -IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_X_AXIS_PORT));
+    SmartDashboard.putNumber("xSpeed", xSpeed);
+    SmartDashboard.putNumber("Joystick Y", IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_Y_AXIS_PORT));
+    SmartDashboard.putNumber("ySpeed", ySpeed);
+    SmartDashboard.putNumber("Joystick Turn", IOConstants.DRIVER_JOYSTICK_COMMAND_JOYSTICK.getRawAxis(IOConstants.JOYSTICK_TWIST_AXIS_PORT));
+    SmartDashboard.putNumber("turningSpeed", turningSpeed);
     
     // Set the module state
     // This sets the motor power for each Swerve Module

@@ -3,8 +3,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -28,7 +29,7 @@ public class SwerveModule extends SubsystemBase
   
   private final PIDController turningPidController;
   
-  private final DutyCycleEncoder absoluteEncoder;
+  private final CANcoder absoluteEncoder;
   
   private final double absoluteEncoderOffsetRad;
   
@@ -46,10 +47,12 @@ public class SwerveModule extends SubsystemBase
     SmartDashboard.putNumber(moduleName + " ABE Manual", 0);
     
     // Create absolute encoder
-    absoluteEncoder = new DutyCycleEncoder(absoluteEncoderId);
+    absoluteEncoder = new CANcoder(absoluteEncoderId);
+
+    //absoluteEncoder.getConfigurator().apply(new CANcoderConfiguration());
     
     // Set duty cycle range of encoder of ABE encoder
-    absoluteEncoder.setDutyCycleRange(DriveConstants.ABSOLUTE_ENCODER_MINIMUM, DriveConstants.ABSOLUTE_ENCODER_MAXIMUM);
+    //absoluteEncoder.setDutyCycleRange(DriveConstants.ABSOLUTE_ENCODER_MINIMUM, DriveConstants.ABSOLUTE_ENCODER_MAXIMUM);
     
     // Create drive and turning motor
     driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
@@ -91,7 +94,7 @@ public class SwerveModule extends SubsystemBase
   
   public void update()
   {
-    SmartDashboard.putNumber(moduleName + "Absolute-Position", absoluteEncoder.getAbsolutePosition());
+    SmartDashboard.putNumber(moduleName + "Absolute-Position", absoluteEncoder.getAbsolutePosition().getValueAsDouble());
   }
   
   // Helpful get methods
@@ -131,7 +134,7 @@ public class SwerveModule extends SubsystemBase
     double angle;
     
     // Get encoder absolute position goes from 1 to 0
-    angle = 1 - absoluteEncoder.getAbsolutePosition();
+    angle = 1 - absoluteEncoder.getAbsolutePosition().getValueAsDouble();
     
     // Convert into radians
     angle *= 2.0 * Math.PI;
