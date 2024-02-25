@@ -6,7 +6,10 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 
 public final class Constants
@@ -65,7 +68,7 @@ public final class Constants
 
     // Encoders on Drive Motors
     public static final boolean FRONT_LEFT_DRIVE_ENCODER_REVERSED = true;
-    public static final boolean FRONT_RIGH_DRIVE_ENCODER_REVERSED = true;
+    public static final boolean FRONT_RIGHT_DRIVE_ENCODER_REVERSED = true;
     public static final boolean BACK_LEFT_DRIVE_ENCODER_REVERSED = true;
     public static final boolean BACK_RIGHT_DRIVE_ENCODER_REVERSED = true;
     
@@ -112,7 +115,6 @@ public final class Constants
     
     // Misc
     public static final double TURNING_MINIMUM = 0.05; // Minimum turning speed which should actually cause a turn
-    public static final double TURNING_SPEED_MULTIPLIER = 100; // Multiplier for the turning speed.
   }
   
   // Input and Output
@@ -128,5 +130,15 @@ public final class Constants
     public static final Joystick DRIVER_JOYSTICK = new Joystick(JOYSTICK_PORT);
     
     public static final CommandJoystick DRIVER_JOYSTICK_COMMAND_JOYSTICK = new CommandJoystick(JOYSTICK_PORT);
+  }
+
+  public static final class ShuffleboardConstants
+  {
+    public static final ShuffleboardTab SWERVE_SHUFFLEBOARD_TAB = Shuffleboard.getTab("Swerve");
+
+    public static GenericEntry frontLeftRotation = SWERVE_SHUFFLEBOARD_TAB.add("Front Left Rotation", 0.0).getEntry();
+    public static GenericEntry frontRightRotation = SWERVE_SHUFFLEBOARD_TAB.add("Front Right Rotation", 0.0).getEntry();
+    public static GenericEntry backLeftRotation = SWERVE_SHUFFLEBOARD_TAB.add("Back Left Rotation", 0.0).getEntry();
+    public static GenericEntry backRightRotation = SWERVE_SHUFFLEBOARD_TAB.add("Back Right Rotation", 0.0).getEntry();
   }
 }
