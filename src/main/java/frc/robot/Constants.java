@@ -101,7 +101,7 @@ public final class Constants
     public static final double DRIVE_MAX_LINEAR_SPEED = .1;
     public static final double DRIVE_MAX_ANGULAR_SPEED = .05; 
     public static final double DRIVE_MAX_LINEAR_ACCELERATION = .1;
-    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = .1;
+    public static final double DRIVE_MAX_ANGULAR_ACCELERATION = .1; // Currently unused
     
     // PID Rotation
     public static final double PROPORTIOAL_ROTATION_CONTROLLER = 0.05;

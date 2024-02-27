@@ -44,9 +44,11 @@ public class SwerveJoystickCommand extends Command
     this.Y_LIMITER = new SlewRateLimiter(DriveConstants.DRIVE_MAX_LINEAR_ACCELERATION);
     
     // Set default PID values for ROTATION_CONTROLLER
-    ROTATION_CONTROLLER = new PIDController(DriveConstants.PROPORTIOAL_ROTATION_CONTROLLER,
+    this.ROTATION_CONTROLLER = new PIDController(DriveConstants.PROPORTIOAL_ROTATION_CONTROLLER,
         DriveConstants.INTEGRAL_ROTATION_CONTROLLER,
         DriveConstants.DIFFERENTIAL_ROTATION_CONTROLLER);
+
+    // Add slew rate limiter to Rotation PID??
 
     // Add info to Shuffleboard
     ShuffleboardConstants.SWERVE_SHUFFLEBOARD_TAB.add("Rotation PID", ROTATION_CONTROLLER);
