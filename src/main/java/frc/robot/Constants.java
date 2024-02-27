@@ -103,13 +103,12 @@ public final class Constants
     public static final double DRIVE_MAX_LINEAR_ACCELERATION = .1;
     public static final double DRIVE_MAX_ANGULAR_ACCELERATION = .1;
     
-    // PID Thetas
-    public static final double PROPORTIOAL_THETA_CONTROLLER = 0.1;
-    public static final double INTEGRAL_THETA_CONTROLLER = 0.0;
-    public static final double DIFFERENTIAL_THETA_CONTROLLER = 0.0;
+    // PID Rotation
+    public static final double PROPORTIOAL_ROTATION_CONTROLLER = 0.05;
+    public static final double INTEGRAL_ROTATION_CONTROLLER = 0.0;
+    public static final double DIFFERENTIAL_ROTATION_CONTROLLER = 0.0;
     
     // Motor Current Limits
-
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 30;
     public static final int TURNING_MOTOR_CURRENT_LIMIT = 30;
     
